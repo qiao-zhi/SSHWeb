@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<mapping resource="cn/qlq/domain/Customer.hbm.xml" />
-		<mapping resource="cn/qlq/domain/LinkMan.hbm.xml" />
+		<mapping class="cn.qlq.domain.Customer" />
+		<mapping class="cn.qlq.domain.LinkMan" />
 	</session-factory>
 </hibernate-configuration>

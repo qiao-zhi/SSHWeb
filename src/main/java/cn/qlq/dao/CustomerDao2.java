@@ -1,5 +1,7 @@
 package cn.qlq.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import cn.qlq.domain.Customer;
@@ -24,4 +26,11 @@ public interface CustomerDao2 {
 	 * 测试通过hibernate获取的session是否同一线程是一样的
 	 */
 	public Session testSessionIsSameInOneThread();
+
+	/**
+	 * 查询所有的客户信息
+	 * 
+	 * @return
+	 */
+	public List<Customer> listAllCustomers();
 }

@@ -1,7 +1,19 @@
 package cn.qlq.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 //联系人实体
+@Entity
 public class LinkMan {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long lkm_id;
 	private Character lkm_gender;
 	private String lkm_name;
@@ -13,6 +25,8 @@ public class LinkMan {
 	private String lkm_position;
 
 	// 表达多对一关系
+	@ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id") // 定义在linkman的客户的外键列名称
 	private Customer customer;
 
 	public Customer getCustomer() {

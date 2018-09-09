@@ -1,5 +1,7 @@
 package cn.qlq.service;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,5 +55,10 @@ public class CustomerServiceImpl implements CustomerService {
 		log.info("daoSession---------------{}", daoSession.toString());
 		log.info("daoSession.equals(serviceSession) is :{}", daoSession.equals(serviceSession));
 		return daoSession.equals(serviceSession);
+	}
+
+	@Override
+	public List<Customer> listAllCustomers() {
+		return customerDao2.listAllCustomers();
 	}
 }

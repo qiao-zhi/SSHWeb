@@ -1,6 +1,8 @@
 package cn.qlq.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -33,6 +35,11 @@ public class CustomerAction {
 
 	private Customer c;// 对象驱动保存对象
 
+	/**
+	 * 保存客户，保存结果以JSON形式返回
+	 * 
+	 * @return
+	 */
 	@Action(value = "saveCus", results = {
 			@Result(name = "success", type = "json", params = { "root", "responseMap" }) })
 	public String saveCus() {
@@ -48,7 +55,7 @@ public class CustomerAction {
 	}
 
 	/**
-	 * 测试Dao层直接注入hibernateTemplate
+	 * 测试Dao层直接注入hibernateTemplate保存客户
 	 * 
 	 * @return
 	 */
@@ -66,6 +73,11 @@ public class CustomerAction {
 		return "success";
 	}
 
+	/**
+	 * 根据ID查询单个客户信息，以JSON形式返回
+	 * 
+	 * @return
+	 */
 	@Action(value = "getCusById", results = {
 			@Result(name = "success", type = "json", params = { "root", "responseMap" }) })
 	public String getCusById() {
@@ -82,6 +94,31 @@ public class CustomerAction {
 		return "success";
 	}
 
+	/**
+	 * 查询所有的顾客信息，转发到listAllCustomers页面
+	 * 
+	 * @return
+	 */
+	@Action(value = "listAllCustomers", results = {
+			@Result(name = "success", type = "json", params = { "root", "responseMap" }) })
+	public String listAllCustomers() {
+		List<Customer> customers = null;
+		try {
+			customers = customerService.listAllCustomers();
+		} catch (Exception e) {
+			log.error("listAllCustomers error", e);
+			customers = new ArrayList();
+		} finally {
+			responseMap.put("customers", customers);
+			return "success";
+		}
+	}
+
+	/**
+	 * 测试同一请求的session是否与线程绑定的session(ThreadLocal)
+	 * 
+	 * @return
+	 */
 	@Action(value = "testSessionIsSameInOneThread", results = {
 			@Result(name = "success", type = "json", params = { "root", "responseMap" }) })
 	public String testSessionIsSameInOneThread() {
@@ -104,5 +141,4 @@ public class CustomerAction {
 	public void setResponseMap(Map responseMap) {
 		this.responseMap = responseMap;
 	}
-
 }

@@ -1,5 +1,7 @@
 package cn.qlq.service;
 
+import java.util.List;
+
 import cn.qlq.domain.Customer;
 
 public interface CustomerService {
@@ -24,4 +26,11 @@ public interface CustomerService {
 	 * 测试通过hibernateTemplete获取的session是否同一线程是一样的
 	 */
 	public boolean testSessionIsSameInOneThread();
+	
+	/**
+	 * 查询所有的客户信息
+	 * 
+	 * @return
+	 */
+	public List<Customer> listAllCustomers();
 }

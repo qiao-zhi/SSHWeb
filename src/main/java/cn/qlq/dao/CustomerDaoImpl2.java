@@ -73,4 +73,10 @@ public class CustomerDaoImpl2 implements CustomerDao2 {
 	public Session testSessionIsSameInOneThread() {
 		return hibernateTemplate.getSessionFactory().getCurrentSession();
 	}
+
+	@Override
+	public List<Customer> listAllCustomers() {
+		String hql = "from Customer";
+		return (List<Customer>) hibernateTemplate.find(hql);
+	}
 }
