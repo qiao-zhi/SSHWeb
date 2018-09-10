@@ -83,7 +83,7 @@ public class CustomerAction {
 	public String getCusById() {
 		Customer cus = null;
 		try {
-			cus = customerService.getCustomerById(15l);
+			cus = customerService.getCustomerById(1l);
 		} catch (Exception e) {
 			responseMap.put("msg", "查询客户失败！");
 			return "success";

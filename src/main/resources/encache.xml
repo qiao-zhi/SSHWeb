@@ -1,0 +1,21 @@
+<ehcache updateCheck="false" dynamicConfig="true">  
+    <diskStore path="java.io.tmpdir"/>  
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="20"
+        timeToLiveSeconds="20"
+        overflowToDisk="true"
+        />
+     
+       <cache name="cache_test" 
+        maxElementsInMemory="2"  
+        eternal="false"  
+        timeToIdleSeconds="60"  
+        timeToLiveSeconds="60"  
+        maxElementsOnDisk="2"
+        overflowToDisk="true"
+        diskPersistent="false" 
+        memoryStoreEvictionPolicy="FIFO"  
+   /> 
+</ehcache>

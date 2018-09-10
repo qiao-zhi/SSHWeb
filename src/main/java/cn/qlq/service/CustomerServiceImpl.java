@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return daoSession.equals(serviceSession);
 	}
 
+	@Cacheable(value="cache_test")	
 	@Override
 	public List<Customer> listAllCustomers() {
 		return customerDao2.listAllCustomers();

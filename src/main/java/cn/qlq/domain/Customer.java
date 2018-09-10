@@ -1,5 +1,6 @@
 package cn.qlq.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,10 +13,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Index;
 
 @Entity
-public class Customer {
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Customer implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1196274234679513849L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long cust_id;

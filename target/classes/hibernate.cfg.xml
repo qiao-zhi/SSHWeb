@@ -4,6 +4,11 @@
 	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
+		<!-- 使用二级缓存 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<!--设置缓存的类型，设置缓存的提供商 -->
+		<property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory</property>
+
 		<mapping class="cn.qlq.domain.Customer" />
 		<mapping class="cn.qlq.domain.LinkMan" />
 	</session-factory>

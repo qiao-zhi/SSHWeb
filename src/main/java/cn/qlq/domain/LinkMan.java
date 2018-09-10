@@ -9,8 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 //联系人实体
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class LinkMan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
