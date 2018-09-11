@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.qlq.dao.CustomerDao;
 import cn.qlq.dao.CustomerDao2;
 import cn.qlq.domain.Customer;
+import cn.qlq.utils.EhcacheUtils;
+import net.sf.ehcache.Ehcache;
 
 @Service
 @Transactional
@@ -46,9 +48,21 @@ public class CustomerServiceImpl implements CustomerService {
 		return true;
 	}
 
+	/**
+	 * 查询完成的时候手动添加缓存
+	 */
 	@Override
 	public Customer getCustomerById(Long cusId) {
-		return customerDao.getCustomerById(cusId);
+		Customer cus = (Customer) EhcacheUtils.get(EhcacheUtils.HANDLE_CACHE, cusId);
+		if (cus == null) {
+			cus = customerDao.getCustomerById(cusId);
+			EhcacheUtils.put(EhcacheUtils.HANDLE_CACHE, cusId, cus);
+			log.info("添加缓存:{}", cus);
+			return cus;
+		} else {
+			log.info("直接查的缓存的数据:{}", cus);
+			return cus;
+		}
 	}
 
 	@Override

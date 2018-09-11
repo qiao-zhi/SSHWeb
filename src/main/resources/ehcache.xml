@@ -8,7 +8,20 @@
         overflowToDisk="true"
         />
      
+     <!-- 注解添加缓存的name -->
        <cache name="cache_test" 
+        maxElementsInMemory="2"  
+        eternal="false"  
+        timeToIdleSeconds="60"  
+        timeToLiveSeconds="60"  
+        maxElementsOnDisk="2"
+        overflowToDisk="true"
+        diskPersistent="false" 
+        memoryStoreEvictionPolicy="FIFO"  
+   /> 
+   
+   		<!-- 手动添加缓存的name -->
+       <cache name="handle_cache_test" 
         maxElementsInMemory="2"  
         eternal="false"  
         timeToIdleSeconds="60"  
