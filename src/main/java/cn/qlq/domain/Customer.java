@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cache;
@@ -37,6 +38,8 @@ public class Customer implements Serializable{
 	private String cust_linkman;
 	private String cust_phone;
 	private String cust_mobile;
+	@Lob
+	private String cust_comment;
 	// 使用set集合,表达一对多关系
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_id") // 定义在linkman的客户的外键列名称
@@ -128,4 +131,11 @@ public class Customer implements Serializable{
 	public Customer() {
 	}
 
+	public String getCust_comment() {
+		return cust_comment;
+	}
+
+	public void setCust_comment(String cust_comment) {
+		this.cust_comment = cust_comment;
+	}
 }
