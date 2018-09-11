@@ -18,5 +18,15 @@ http://www.springframework.org/schema/cache/spring-cache-3.1.xsd">
 
 	<!-- 自动扫描dao和service包(自动注入) -->
 	<context:component-scan base-package="cn.qlq" />
+	
+	
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehcache"></property>
+	</bean>
+	<bean id="ehcache"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml"></property>
+	</bean>
+	<cache:annotation-driven cache-manager="cacheManager" />
 
 </beans>

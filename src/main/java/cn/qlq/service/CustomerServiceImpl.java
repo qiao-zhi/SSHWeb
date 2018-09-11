@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ import cn.qlq.domain.Customer;
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
-	private static Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 	@Autowired
 	private CustomerDao customerDao;
 
@@ -28,8 +29,13 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 
+	/**
+	 * 删除缓存
+	 */
+	@CacheEvict(value = "cache_test", key = "'allCus'")
 	@Override
 	public boolean saveCustomer(Customer c) {
+		log.info("进入service方法----saveCustomer");
 		customerDao.saveCustomer(c);
 		return true;
 	}
@@ -58,9 +64,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return daoSession.equals(serviceSession);
 	}
 
-	@Cacheable(value="cache_test")	
+	@Cacheable(value = "cache_test", key = "'allCus'")
 	@Override
 	public List<Customer> listAllCustomers() {
+		log.info("进入service方法----listAllCustomers");
 		return customerDao2.listAllCustomers();
 	}
 }
